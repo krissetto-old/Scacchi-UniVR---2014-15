@@ -321,44 +321,46 @@ public class Gioco extends Scacchiera {
 //-----------------------------------------------------------------------------------------------------
 	
 	//Calcola le caselle tra il re e chi gli ha fatto scacco
-	public boolean mosseComprese(LinkedList<Mossa> mosseIntermedie, Casella chiHaFattoScacco, int regolaX, int regolaY){
+	public LinkedList<Mossa> mosseComprese(LinkedList<Mossa> mosseIntermedie, Casella chiHaFattoScacco, int regolaX, int regolaY){
 		
-		boolean exist = false;
+		System.out.println("casella "+chiHaFattoScacco.riga+regolaX+","+chiHaFattoScacco.colonna+regolaY);
 		// se la prossima casella esce dalla scacchiera rompi la ricorsione
 		if (chiHaFattoScacco.riga+regolaX > 7 ||chiHaFattoScacco.riga+regolaX < 0 ||chiHaFattoScacco.colonna+regolaY>7 || chiHaFattoScacco.colonna+regolaY<0){
-			return exist;
+			return mosseIntermedie;
 		}
 		// se la casella intermedia è vuota la aggiunge alla lista e si chiama ricorsivamente per trovare la prossima
 		Casella casella = new Casella(chiHaFattoScacco.riga+regolaX, chiHaFattoScacco.colonna+regolaY);
+System.out.println(casella.riga+","+casella.colonna);
 		if( contenuto(casella) == VUOTA){
-			exist = true;
 			mosseIntermedie.add(new Mossa(chiHaFattoScacco));
 			
 			mosseIntermedie.getLast().caselleToccate.add(casella);
 			
 			mosseComprese(mosseIntermedie, casella, regolaX, regolaY);
+			System.out.println(mosseIntermedie.get(0).caselleToccate.getLast().riga + "," + mosseIntermedie.get(0).caselleToccate.getLast().colonna);
+
 		}
-		return exist;
+		return mosseIntermedie;
 	}
 
 //-----------------------------------------------------------------------------------------------------
 
 	//Funzione che calcola i numeri da sommare ad una casella per trovare quelle tra re e chi ha fatto scacco
-	public void impostaRegole(Casella c0){
+	public void impostaRegole(Casella re){
 
         // controlla in che direzione deve andare  per calcolare le caselle intermedie confrontando la posizione 
 		// di chi ha fatto scacco e quella del re
 		if(contenuto(chiHaFattoScacco)==ALFIERE_NERO || contenuto(chiHaFattoScacco)==ALFIERE_BIANCO ){
-			if((chiHaFattoScacco.riga - c0.riga)>0)
+			if((chiHaFattoScacco.riga > re.riga))
 				regolaX=1;
 			else
 				regolaX=-1;
-			if((chiHaFattoScacco.colonna - c0.colonna)>0)
+			if((chiHaFattoScacco.colonna > re.colonna))
 				regolaY=1;
 			else
 				regolaY=-1;
 		}else if(contenuto(chiHaFattoScacco)==TORRE_NERA || contenuto(chiHaFattoScacco)==TORRE_BIANCA){
-			if((chiHaFattoScacco.riga - c0.riga)>0){
+			if((chiHaFattoScacco.riga > re.riga)){
 				regolaX = 1;
 				regolaY = 0;
 			}
@@ -366,7 +368,7 @@ public class Gioco extends Scacchiera {
 				regolaX = -1;
 				regolaY = 0;
 			}
-			if((chiHaFattoScacco.colonna - c0.colonna)>0){
+			if((chiHaFattoScacco.colonna > re.colonna)){
 				regolaY = 1;
 				regolaX = 0;
 			}
@@ -375,32 +377,32 @@ public class Gioco extends Scacchiera {
 				regolaX = 0;
 			}
 		}else if(contenuto(chiHaFattoScacco)==REGINA_NERA || contenuto(chiHaFattoScacco)==REGINA_BIANCA){
-			if((chiHaFattoScacco.riga == c0.riga) || (chiHaFattoScacco.colonna ==c0.colonna)){
-				if((chiHaFattoScacco.riga - c0.riga)>0){
-					regolaX = 1;
-					regolaY = 0;
-				}
-				else{
+			if((chiHaFattoScacco.riga == re.riga) || (chiHaFattoScacco.colonna ==re.colonna)){
+				if((chiHaFattoScacco.riga > re.riga)){
 					regolaX = -1;
 					regolaY = 0;
 				}
-				if((chiHaFattoScacco.colonna - c0.colonna)>0){
-					regolaY = 1;
-					regolaX = 0;
-				}
 				else{
+					regolaX = +1;
+					regolaY = 0;
+				}
+				if((chiHaFattoScacco.colonna > re.colonna)){
 					regolaY = -1;
 					regolaX = 0;
 				}
+				else{
+					regolaY = 1;
+					regolaX = 0;
+				}
 			}else 
-				if((chiHaFattoScacco.riga - c0.riga)>0)
-					regolaX=1;
-				else
+				if((chiHaFattoScacco.riga > re.riga))
 					regolaX=-1;
-				if((chiHaFattoScacco.colonna - c0.colonna)>0)
-					regolaY=1;
 				else
+					regolaX=+1;
+				if((chiHaFattoScacco.colonna > re.colonna))
 					regolaY=-1;
+				else
+					regolaY=+1;
 		}
 		
 	}
@@ -408,7 +410,9 @@ public class Gioco extends Scacchiera {
 //-----------------------------------------------------------------------------------------------------
 
 	//Funzione che controlla se qualche pezzo può mettersi tra il re e chi ha fatto scacco
-	public boolean scaccoMatto(Casella c0){
+	public boolean scaccoMatto(){
+		
+		// i pezzi hanno già fatto la mossa quindi c0==vuoto e c1=chihafattoscacco
 
 		for (int x = 0; x < 8; x++) {								//scorre le righe
 			for (int y = 0; y < 8; y++) { 							//scorre le colonne
@@ -428,22 +432,24 @@ public class Gioco extends Scacchiera {
 								
 								for(int avversario = 0; avversario < possibilitaScacco[palinka].size(); avversario++){   // scorre le mosse del pezzo che ha fatto scacco
 									LinkedList<Mossa> mosseIntermedie=new LinkedList<Mossa>();
-									if ((palinka == 7 || palinka == 1 || palinka == 11 || palinka == 5 || palinka == 9 || palinka == 3)){	// se chi ha fatto scacco può estende le proprie mosse	
 									
-										if(colore(aChiTocca)==NERO)
-											impostaRegole(re_bianco);									// imposta le regole per calcolare le caselle intermedie
-										else
-											impostaRegole(re_nero);
+									if ((palinka == 7 || palinka == 1 || palinka == 11 || palinka == 5 || palinka == 9 || palinka == 3)){	// se chi ha fatto scacco può estende le proprie mosse	
+								
+										if(colore(aChiTocca)==NERO){
+											impostaRegole(re_nero);}			// imposta le regole per calcolare le caselle intermedie
+										else{
+											impostaRegole(re_bianco);
+											System.out.println(palinka);}
 										
-										mosseComprese(mosseIntermedie, chiHaFattoScacco, regolaX, regolaY);  // calcola le caselle tra chi ha fatto scacco ed il re
-			
-										for(int gianni = 0; gianni < mosseIntermedie.size(); gianni++)
-											//se la casella di destinazione della mossa del pezzo che si potrebbe mettere inmezzo E' UGUALE a la casella di destinazione di una  delle caselle intermedie
-											for(int i=0;i<mosseIntermedie.size();i++){
-												if(Casella.stessa(tempMossa.caselleToccate.getLast(), mosseIntermedie.get(i).caselleToccate.getLast())){
-													return false;
-												}
+										
+										mosseIntermedie = mosseComprese(mosseIntermedie, chiHaFattoScacco, regolaX, regolaY);  // calcola le caselle tra chi ha fatto scacco ed il re
+										
+										//se la casella di destinazione della mossa del pezzo che si potrebbe mettere inmezzo E' UGUALE a la casella di destinazione di una  delle caselle intermedie
+										for(int i = 0; i < mosseIntermedie.size(); i++){
+											if(Casella.stessa(tempMossa.caselleToccate.getLast(), mosseIntermedie.get(i).caselleToccate.getLast())){
+												return false;
 											}
+										}
 									}
 								}
 							}
@@ -630,7 +636,7 @@ public class Gioco extends Scacchiera {
 	
 				if ((conta + c) == possibilitaScacco[4].size() && !puoEssereMangiato ){
 			
-					if(scaccoMatto(c0)){
+					if(scaccoMatto()){
 						view.Scacchi.stampaMessaggio("SCACCO MATTO. PARTITA TERMINATA. Hanno vinto i neri!");	
 						return true;
 					}
@@ -651,7 +657,7 @@ public class Gioco extends Scacchiera {
 					puoEssereMangiato=puoEssereMangiato(1,pezzo);
 				}
 				if( (conta + c) == possibilitaScacco[10].size() && !puoEssereMangiato){
-					if(scaccoMatto(c0)){
+					if(scaccoMatto()){
 						view.Scacchi.stampaMessaggio("SCACCO MATTO. PARTITA TERMINATA. Hanno vinto i bianchi!");	
 						return true;
 					}

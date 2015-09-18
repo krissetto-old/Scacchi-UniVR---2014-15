@@ -350,7 +350,7 @@ public class TestScacchi {
 			mossa.caselleToccate.add(new Casella(2,5));
 			test.esegui(mossa);
 			
-			assertEquals(true, test.scaccoMatto(casella));
+			assertEquals(true, test.scaccoMatto());
 	 }
 	
 	 @Test
@@ -365,7 +365,7 @@ public class TestScacchi {
 			mossa.caselleToccate.add(new Casella(2,2));
 			test.esegui(mossa);
 
-			assertEquals(true, test.scaccoMatto(casella));
+			assertEquals(true, test.scaccoMatto());
 	 }
 	 
 	 // TEST MOSSA VALIDA ------------------------------------------------------------------------------
