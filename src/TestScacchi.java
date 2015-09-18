@@ -404,10 +404,8 @@ public class TestScacchi {
 		assertFalse(test.mossaValida(test.RE_NERO, new Casella(5,1), new Casella(4,2), test.VUOTA, false, false ));
 
 	}
-	
-	// TEST MANGIATA RE -------------------------------------------------------------------------------
 
-	// TEST CONTROLLO MANGATA --------------------------------------------------------------------------------------
+	// TEST CONTROLLO MANGATA RE ----------------------------------------------------------------------
 
 	@Test
 	public void testControlloMangiataReBianco(){

@@ -182,8 +182,6 @@ public class Gioco extends Scacchiera {
 			if (controlloPedone(pezzo) && bordoOpposto(c2, col)){
 				m0.fattaDama = true;	
 			}
-		//	if (contenuto(c2)==RE_BIANCO || contenuto(c2)==RE_NERO)
-		//		System.out.println(m0.caselleToccate.getFirst().riga +" , "+m0.caselleToccate.getFirst().colonna+ " "+pezzo + " puo mangiare un re");
 			mossa.add(m0);
 			return true;
 		}
@@ -249,7 +247,6 @@ public class Gioco extends Scacchiera {
 				}
 			}
 		}
-		
 		
 		if(pezzo==RE_BIANCO){
 			for(int x = 0; x < 8; x++){
@@ -528,8 +525,6 @@ public class Gioco extends Scacchiera {
 			metti(c1,RE_NERO);	
 
 		return true;
-	
-
 }
 
 //-----------------------------------------------------------------------------------------------------		
