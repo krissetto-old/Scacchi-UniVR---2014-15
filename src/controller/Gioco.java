@@ -432,12 +432,10 @@ public class Gioco extends Scacchiera {
 									
 									if ((palinka == 7 || palinka == 1 || palinka == 11 || palinka == 5 || palinka == 9 || palinka == 3)){	// se chi ha fatto scacco può estende le proprie mosse	
 								
-										if(colore(aChiTocca)==NERO){
-											impostaRegole(re_nero);}			// imposta le regole per calcolare le caselle intermedie
-										else{
-											impostaRegole(re_bianco);
-											System.out.println(palinka);}
-										
+										if(colore(aChiTocca)==NERO)
+											impostaRegole(re_nero);			// imposta le regole per calcolare le caselle intermedie
+										else
+											impostaRegole(re_bianco);									
 										
 										mosseIntermedie = mosseComprese(mosseIntermedie, chiHaFattoScacco, regolaX, regolaY);  // calcola le caselle tra chi ha fatto scacco ed il re
 										
@@ -459,6 +457,7 @@ public class Gioco extends Scacchiera {
 	}
 
 //-----------------------------------------------------------------------------------------------------		
+
 
 	public int switchone(int pezzo){
 		switch (pezzo){
@@ -490,6 +489,10 @@ public class Gioco extends Scacchiera {
 			return 12;				
 		}
 }
+
+//-----------------------------------------------------------------------------------------------------		
+
+	//Controlla se il re cade in scacco mangiando qualcosa
 
 //-----------------------------------------------------------------------------------------------------		
 
@@ -533,6 +536,10 @@ public class Gioco extends Scacchiera {
 
 		return true;
 }
+
+//-----------------------------------------------------------------------------------------------------		
+
+	//Controlla se il pezzo che ha fatto scacco può essere mangiato
 
 //-----------------------------------------------------------------------------------------------------		
 
@@ -690,6 +697,10 @@ public class Gioco extends Scacchiera {
 //-----------------------------------------------------------------------------------------------------		
 
 	// Ritorna vero se uno dei due giocatori ha vinto		 
+
+//-----------------------------------------------------------------------------------------------------		
+
+	// Ritorna vero se uno dei due giocatori ha vinto
 	public boolean chiHaVinto(boolean scaccoMatto) {
 				
 				int r, c;
@@ -713,6 +724,10 @@ public class Gioco extends Scacchiera {
 //-----------------------------------------------------------------------------------------------------		
 		
 	// Restituisce la lista dlle mosse possibili per il pezzo che si trova nella casella specificata.		
+
+//-----------------------------------------------------------------------------------------------------		
+	
+	// Restituisce la lista dlle mosse possibili per il pezzo che si trova nella casella specificata.	
 	public LinkedList<Mossa> suggerisciMosse(Casella cas) {
 				LinkedList<Mossa> mossePossibili = new LinkedList<Mossa>();
 				int pezzo = contenuto(cas);
@@ -729,6 +744,10 @@ public class Gioco extends Scacchiera {
 //-----------------------------------------------------------------------------------------------------			
 
 	// Funzione che trova le mosse possibili dalla casella specificata, e le aggiunge alla lista.		 
+
+//-----------------------------------------------------------------------------------------------------			
+
+	// Funzione che trova le mosse possibili dalla casella specificata, e le aggiunge alla lista.	
 	protected void suggerisciMosseRic(Mossa m0, LinkedList<Mossa> mosse, Casella cas) {
 				int i;
 				Mossa[] mossePossibili = new Mossa[8];
@@ -789,6 +808,10 @@ public class Gioco extends Scacchiera {
 				 }
 			}
 			
+//-----------------------------------------------------------------------------------------------------			
+
+	// Prova la mossa del giocatore, ovvero verifica se é valida e in tal caso la esegue.
+
 //-----------------------------------------------------------------------------------------------------			
 
 	// Prova la mossa del giocatore, ovvero verifica se é valida e in tal caso la esegue.
