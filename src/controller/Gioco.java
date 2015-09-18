@@ -659,11 +659,17 @@ public class Gioco extends Scacchiera {
 			metti(c1,pezzo);
 		}
 	
-		if(mossaValida == true)
-			if (aChiTocca == BIANCO)
-				aChiTocca = NERO;
-			else
-				aChiTocca = BIANCO;	
+		if(mossaValida == true )
+			if ((pezzo==RE_BIANCO || pezzo==RE_NERO) && (possoMangiare==true))
+				if (aChiTocca == BIANCO)
+					aChiTocca = NERO;
+				else
+					aChiTocca = BIANCO;	
+			else if ((pezzo!=RE_BIANCO && pezzo!=RE_NERO))
+				if (aChiTocca == BIANCO)
+					aChiTocca = NERO;
+				else
+					aChiTocca = BIANCO;
 		
 		for(int x = 0; x < 8; x++)
 			for(int y = 0; y < 8; y++) {
