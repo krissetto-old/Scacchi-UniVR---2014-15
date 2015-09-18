@@ -1,9 +1,6 @@
 package model;
 
-import java.util.LinkedList;
-
 import controller.Casella;
-import controller.Mossa;
 
 public class Scacchiera {
 	

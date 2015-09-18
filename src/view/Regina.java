@@ -5,6 +5,8 @@ import java.awt.Color;
 
 public class Regina extends Casella {
 
+	private static final long serialVersionUID = 1L;
+
 	public Regina(int valore, Color colore) {
 		/* 
 		 * Prima cifra:

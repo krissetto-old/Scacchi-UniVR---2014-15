@@ -19,7 +19,8 @@ import controller.Gioco;
 import controller.Mossa;
 
 public class Scacchi extends JFrame {
-	
+
+	private static final long serialVersionUID = 1L;
 	protected Point click1 = null;
 	protected Point click2 = null;
 	protected JButton p1 = null;

@@ -1,11 +1,6 @@
 import static org.junit.Assert.*;
-
-import java.awt.Point;
-import java.awt.event.ActionListener;
 import java.util.LinkedList;
-
 import org.junit.Test;
-
 import controller.*;
 
 public class TestScacchi {

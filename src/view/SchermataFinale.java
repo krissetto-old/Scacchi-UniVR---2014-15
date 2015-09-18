@@ -12,6 +12,8 @@ import javax.swing.text.StyledDocument;
 
 class SchermataFinale extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+
 	SchermataFinale() {
 		
 		//Layout principale

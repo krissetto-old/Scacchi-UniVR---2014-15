@@ -6,7 +6,9 @@ import javax.swing.ImageIcon;
 
 
 public class Pedone extends Casella {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public Pedone(int valore, Color colore) {
 		
 		/* 
