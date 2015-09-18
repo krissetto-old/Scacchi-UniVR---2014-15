@@ -5,6 +5,7 @@ import java.awt.Color;
 
 public class Alfiere extends Casella {
 	
+	private static final long serialVersionUID = 1L;
 
 	public Alfiere(int valore, Color colore) {
 		/* 

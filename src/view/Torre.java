@@ -4,7 +4,9 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 
 public class Torre extends Casella {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public Torre(int valore, Color colore) {
 		
 		/* 

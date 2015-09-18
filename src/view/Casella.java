@@ -5,9 +5,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import javax.swing.JButton;
 
-
-
 public abstract class Casella extends JButton{
+
+	private static final long serialVersionUID = 1L;
 
 	protected Casella() {
 		// Di default e` grigio

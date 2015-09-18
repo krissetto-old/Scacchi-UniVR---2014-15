@@ -4,7 +4,9 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 
 public class Re extends Casella {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public Re(int valore, Color colore) {
 		/* 
 		 * Prima cifra:
