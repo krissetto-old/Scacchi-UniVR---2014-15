@@ -323,21 +323,18 @@ public class Gioco extends Scacchiera {
 	//Calcola le caselle tra il re e chi gli ha fatto scacco
 	public LinkedList<Mossa> mosseComprese(LinkedList<Mossa> mosseIntermedie, Casella chiHaFattoScacco, int regolaX, int regolaY){
 		
-		System.out.println("casella "+chiHaFattoScacco.riga+regolaX+","+chiHaFattoScacco.colonna+regolaY);
 		// se la prossima casella esce dalla scacchiera rompi la ricorsione
 		if (chiHaFattoScacco.riga+regolaX > 7 ||chiHaFattoScacco.riga+regolaX < 0 ||chiHaFattoScacco.colonna+regolaY>7 || chiHaFattoScacco.colonna+regolaY<0){
 			return mosseIntermedie;
 		}
 		// se la casella intermedia è vuota la aggiunge alla lista e si chiama ricorsivamente per trovare la prossima
 		Casella casella = new Casella(chiHaFattoScacco.riga+regolaX, chiHaFattoScacco.colonna+regolaY);
-System.out.println(casella.riga+","+casella.colonna);
 		if( contenuto(casella) == VUOTA){
 			mosseIntermedie.add(new Mossa(chiHaFattoScacco));
 			
 			mosseIntermedie.getLast().caselleToccate.add(casella);
 			
 			mosseComprese(mosseIntermedie, casella, regolaX, regolaY);
-			System.out.println(mosseIntermedie.get(0).caselleToccate.getLast().riga + "," + mosseIntermedie.get(0).caselleToccate.getLast().colonna);
 
 		}
 		return mosseIntermedie;
