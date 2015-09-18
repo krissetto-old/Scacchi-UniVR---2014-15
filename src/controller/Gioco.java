@@ -494,9 +494,12 @@ public class Gioco extends Scacchiera {
 	public boolean controlloMangiataRe(int pezzo, Casella c0, Casella c1, Mossa m, boolean scaccoNuovo, boolean mossaValida, boolean sonoUnReBianco, boolean sonoUnReNero ){
 		
 		
-		int temp = contenuto(c1);
-	
-		metti(c1, VUOTA);
+		int temp = contenuto(c1);		// pezzo da mangiare
+		metti(c0,VUOTA);
+		if(sonoUnReBianco)
+			metti(c1,RE_BIANCO);
+		else if (sonoUnReNero)
+			metti(c1,RE_NERO);	
 	
 		// ricalcolo tutte le possibili mosse di tutti
 		for(int x = 0; x < 8; x++)
@@ -507,6 +510,7 @@ public class Gioco extends Scacchiera {
 			}
 
 		scaccoNuovo = Scacco(pezzo,m);
+		
 		mossaValida = mossaValida(pezzo,c1,c0,temp,sonoUnReBianco,sonoUnReNero);
 	
 		if(!mossaValida){
